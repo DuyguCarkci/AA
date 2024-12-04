@@ -244,9 +244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a787436626ef13f45987f1a5aa356276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletRemain: 500
-  bulletPrefab: {fileID: 9037747207921279343, guid: 234bf60b43df37b41a0cc0cd6aa1de19, type: 3}
-  spawnPoint: {fileID: 1862799846}
+  target: {fileID: 500705015}
+  home: {fileID: 1862799846}
+  bulletPrefab: {fileID: 1489973049602412669, guid: 234bf60b43df37b41a0cc0cd6aa1de19, type: 3}
+  moveTime: 0
+  bulletRemain: 10
 --- !u!114 &67363959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +261,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34613681fba251b429eef4be9cda9357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelPrefabs:
+  - {fileID: 4150749692613406992, guid: 9cfbe82dbb590a149bdcd72675d950c9, type: 3}
+  - {fileID: 4150749692613406992, guid: b67b69daa782bf846bbdc8ded765ab37, type: 3}
+  - {fileID: 4150749692613406992, guid: 5529a64abb47edb4a93462e09e36d379, type: 3}
+  - {fileID: 4150749692613406992, guid: be29b9adec396e0499f528b9f512da50, type: 3}
+  - {fileID: 4150749692613406992, guid: 64ef0867f9e9eb24c8e70bf283b5e5a4, type: 3}
 --- !u!114 &67363960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4765a9b9bc1f7e745b7bf3a8bc656284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelManager: {fileID: 67363959}
+  _colorManager: {fileID: 544737890}
 --- !u!1 &500705013
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +480,7 @@ MonoBehaviour:
   normalColor: {r: 0.7490196, g: 0.74509805, b: 0.64705884, a: 1}
   failColor: {r: 1, g: 0, b: 0, a: 1}
   successColor: {r: 0, g: 1, b: 0, a: 1}
+  _camera: {fileID: 519420031}
 --- !u!4 &544737891
 Transform:
   m_ObjectHideFlags: 0

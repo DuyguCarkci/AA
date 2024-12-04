@@ -6,15 +6,11 @@ public class ColorManager : MonoBehaviour
     [SerializeField] private Color failColor = Color.red;
     [SerializeField] private Color successColor = Color.green;
 
-    private Camera _camera;
+    [SerializeField] private Camera _camera;
 
-    public static object Instance { get; internal set; }
+    public static ColorManager Instance { get; internal set; }
 
-    private void Start()
-    {
-        _camera = Camera.main; // Camera'ya referans alýyoruz
-    }
-
+   
     public void SetNormal()
     {
         if (_camera != null)

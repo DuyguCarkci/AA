@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1498306099}
   m_Layer: 0
   m_Name: Center
-  m_TagString: Untagged
+  m_TagString: BulletCenter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40866628a339a4f44808aed4c6130500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextLevel: {fileID: 8383788299405911262}
+  speed: 55
+  bulletAmount: 15
+  centerController: {fileID: 1498306099}
+  textLevel: {fileID: 8383788299405911262}
 --- !u!1 &6832396785780880975
 GameObject:
   m_ObjectHideFlags: 0

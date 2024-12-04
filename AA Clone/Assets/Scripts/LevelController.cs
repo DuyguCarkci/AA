@@ -1,21 +1,18 @@
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro TextLevel;  // UI Text öðesi
+    [Range(0, 400)][SerializeField] private float speed;
+    [Range(1, 20)][SerializeField] private int bulletAmount;
+    [SerializeField] private CenterController centerController;
+    [SerializeField] private TextMeshPro textLevel;
 
-    public void MyStart(int level)
+    public void MyStart(int index)
     {
-        if (TextLevel == null)
-        {
-            Debug.LogError("TextLevel is not assigned in the Inspector!");
-        }
-        else
-        {
-            TextLevel.text = "Level: " + level.ToString();
-        }
+        textLevel.SetText($"{index + 1}");
+        centerController.StartRotate(speed);
+        BulletManager.Instance.bulletRemain = bulletAmount;
     }
-
 }

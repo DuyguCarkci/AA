@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 145126458058999674}
   - component: {fileID: 85793928769026919}
   - component: {fileID: 145126458058999676}
-  - component: {fileID: 145126458058999679}
+  - component: {fileID: 906340584968301288}
   m_Layer: 0
   m_Name: Center
-  m_TagString: Untagged
+  m_TagString: BulletCenter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &145126458058999679
+--- !u!114 &906340584968301288
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,10 +117,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2816820123019473325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40866628a339a4f44808aed4c6130500, type: 3}
+  m_Script: {fileID: 11500000, guid: 4945c35430456fe45be49915ceccb0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextLevel: {fileID: 8383788299405911262}
 --- !u!1 &4028143294026357023
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40866628a339a4f44808aed4c6130500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextLevel: {fileID: 8383788299405911262}
+  speed: 25
+  bulletAmount: 5
+  centerController: {fileID: 906340584968301288}
+  textLevel: {fileID: 8383788299405911262}
 --- !u!1 &6832396785780880975
 GameObject:
   m_ObjectHideFlags: 0

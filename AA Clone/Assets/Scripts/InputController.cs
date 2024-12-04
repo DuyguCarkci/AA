@@ -12,6 +12,7 @@ public class InputController : MonoBehaviour, IPointerDownHandler
         }
         else
         {
+            LevelManager.Instance.OnFinishLevel();
             Debug.LogWarning("No bullets to shoot!");  // Mermi yoksa uyarý ver
         }
     }

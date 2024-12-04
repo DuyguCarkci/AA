@@ -1,15 +1,14 @@
+using System;
 using UnityEngine;
 
 public class CenterCollider : MonoBehaviour
 {
-    // BulletController component'ine eriþim saðlamak için
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        // Eðer çarpan obje BulletController içeriyorsa
-        BulletController bulletController = other.GetComponent<BulletController>();
-        if (bulletController != null)
+        if (col.CompareTag($"BulletCenter"))
         {
-            bulletController.OnCompleted();  // OnCompleted fonksiyonunu çaðýr
+            var bulletCenter = col.GetComponent<BulletCenterCollider>();
+            bulletCenter.MyBullet.OnCompleted(transform.parent);
         }
     }
 }

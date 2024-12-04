@@ -1,21 +1,16 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private LevelManager _levelManager;  // LevelManager referansý
+    [SerializeField] private ColorManager _colorManager;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        Instance = this;
     }
 
     private void Start()
@@ -25,18 +20,31 @@ public class GameManager : MonoBehaviour
 
     public void OnStart()
     {
-        _levelManager.OnStartLevel();  // Seviye baþlatma iþlemi
+        LevelManager.Instance.OnStartLevel();
+        _colorManager.SetNormal();
     }
 
     public void OnGameOver()
     {
         Debug.Log("Game Over! Seviyeler sýfýrlanacak.");
-        _levelManager.ResetLevels();  // Seviye sýfýrlama iþlemi
+        Time.timeScale = 1; // Oyunun durmasý durumunda zamaný yeniden baþlat
+         _colorManager.SetNormal();
+
+        LevelManager.Instance.ResetLevels();
     }
 
     public void OnSuccess()
     {
         Debug.Log("Seviye baþarýyla tamamlandý, sonraki seviyeye geçiliyor...");
-        _levelManager.OnFinishLevel();  // Seviye bitirme iþlemi
+        _colorManager.OnSuccess();
+
+        IEnumerator Do()
+        {
+            yield return new WaitForSeconds(1);
+            Debug.Log("Yeni seviye baþlatýlýyor...");
+            OnStart();
+        }
+
+        StartCoroutine(Do());
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CenterController : MonoBehaviour
 {
+    
     private float _speed;
 
     public void StartRotate(float speed)

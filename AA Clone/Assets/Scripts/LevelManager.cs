@@ -1,54 +1,101 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
 
-    private bool isLevelCompleted = false;
+    [SerializeField] private List<LevelController> levelPrefabs;
+
+    private int _index;
+    private LevelController _current;
 
     private void Awake()
     {
+        // Singleton kontrolü
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+    public void OnStartLevel()
+    {
+        if (levelPrefabs == null || levelPrefabs.Count == 0)
+        {
+            Debug.LogError("Level prefabs listesi boþ veya null!");
+            return;
+        }
+
+        if (_index < 0 || _index >= levelPrefabs.Count)
+        {
+            Debug.LogError($"Geçersiz seviye indeksi: {_index}");
+            return;
+        }
+
+        Debug.Log($"Level baþlatýlýyor. Index: {_index}");
+        var prefab = levelPrefabs[_index];
+        if (prefab == null)
+        {
+            Debug.LogError($"Level prefab null! Index: {_index}");
+            return;
+        }
+
+        _current = Instantiate(prefab);
+        _current.MyStart(_index);
+    }
+
+    public void OnFinishLevel()
+    {
+        if (_current == null)
+        {
+            return;
+        }
+
+        _index++;
+        Debug.Log($"Seviye tamamlandý. Yeni index: {_index}");
+        Destroy(_current.gameObject);
+
+        if (GameManager.Instance != null)
+        {
+            Debug.Log("GameManager mevcut. OnSuccess çaðrýlýyor.");
+            GameManager.Instance.OnSuccess();
         }
         else
         {
-            Instance = this;
+            Debug.LogError("GameManager.Instance NULL!");
         }
     }
 
-    // Seviye tamamlandýysa çalýþacak metot
-    public void OnFinishLevel()
-    {
-        isLevelCompleted = true;
-        Debug.Log("Level Finished!");
-    }
-
-    // SetNormal metodunu buraya ekleyin
-    public void SetNormal()
-    {
-        // Normal bir seviye baþlatmak için gerekli iþlemleri yapýn
-        Debug.Log("Set Normal");
-    }
-
-    // Seviye tamamlandýðýný kontrol etme
     public bool IsLevelCompleted()
     {
-        return isLevelCompleted;
+        if (BulletManager.Instance == null)
+        {
+            Debug.LogError("BulletManager.Instance NULL!");
+            return false;
+        }
+
+        // Mermiler bitti mi?
+        bool isCompleted = BulletManager.Instance.bulletRemain == 0;
+
+        Debug.Log($"Seviye tamamlandý kontrolü yapýlýyor. Durum: {isCompleted}");
+        return isCompleted;
     }
 
-    // Yeni bir seviyeyi baþlatma
-    public void OnStartLevel()
-    {
-        isLevelCompleted = false;
-        Debug.Log("Level Started!");
-    }
-
-    // Seviyeyi sýfýrlama iþlemleri
     public void ResetLevels()
     {
-        isLevelCompleted = false;
-        Debug.Log("Levels reset.");
+        Debug.Log("Seviyeler sýfýrlanýyor ve ilk seviye baþlatýlýyor.");
+        _index = 0;
+
+        if (_current != null)
+        {
+            Destroy(_current.gameObject);
+        }
+
+        OnStartLevel();
     }
 }
